@@ -6,7 +6,8 @@ using namespace std;
 
 const string fileName = "words.txt";
 
-const string consonantLetters = "bcdfghjklmnpqrstvwxyz";    
+const string consonantLetters = "bcdfghjklmnpqrstvwxyz";
+const string separators = " !@#$%^&*()-_=+[{]};:',<>./?\"\n";
 int maxConsonantCount = 0;
 vector<string> words;
 
@@ -71,13 +72,7 @@ int main()
         char ch;
         while (fin.get(ch))
         {
-            if (index > 30)
-            {
-                cout << "Some words in file have lenth longer than 30." << endl;
-                cout << "Check your file and try again.";
-                return 0;
-            }
-            if (ch == ' ' || ch == '\n')
+            if (separators.find(ch) < separators.length() || (ch < 'A' && ch > 'z') || index >= 30)
             {
                 if (previousIsConsonant && consonantCounter > currentWordMaxConsonant)
                 {
